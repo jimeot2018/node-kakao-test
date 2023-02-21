@@ -1,0 +1,77 @@
+{
+  "name": "node-kakao-test",
+  "version": "4.5.1",
+  "description": "Loco protocol compatible library (source: node-kakao)",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "dist_esm",
+    "readme.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "npx mocha -r ts-node/register ./tests/*.test.ts",
+    "test:loco": "node -r ts-node/register loco-test.ts",
+    "test:error": "npx tsc -p ./tsconfig.json --noEmit",
+    "build": "rm -rf ./dist && npm run build:node && npm run build:type",
+    "build:node": "npx swc src -s -d dist --config-file .swcrc ",
+    "build:type": "npx tsc --declaration --emitDeclarationOnly --project tsconfig.json",
+    "docs": "npx typedoc src",
+    "fix": "npx eslint --fix ./src/**/*",
+    "format": "npx prettier --write ./src/**/* --config .prettierrc",
+    "prepublishOnly": "npm run fix && npm run test && npm run build"
+  },
+  "keywords": [
+    "node-kakao",
+    "node-kakao-test",
+    "chat-protocol",
+    "chat-client",
+    "loco-protocol"
+  ],
+  "author": {
+    "name": "antegral",
+    "email": "antegral@antegral.net",
+    "url": "https://antegral.net"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@swc/cli": "^0.1.59",
+    "@swc/core": "^1.3.25",
+    "@types/bson": "^4.0.4",
+    "@types/chai": "^4.2.21",
+    "@types/lossless-json": "^1.0.1",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.3.3",
+    "@types/node-forge": "^0.10.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "chai": "^4.2.0",
+    "eslint": "^7.31.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.0.0",
+    "mocha": "^9.1.3",
+    "ts-node": "^10.1.0",
+    "tsconfig-paths": "^4.1.2",
+    "typedoc": "^0.22.3",
+    "typescript": "^4.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jimeot2018/node-kakao-test.git"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bson": "^4.4.1",
+    "eventemitter3": "^4.0.7",
+    "form-data": "^4.0.0",
+    "hash-wasm": "^4.8.0",
+    "lossless-json": "^1.0.3",
+    "node-forge": "^0.10.0",
+    "promise-socket": "^7.0.0"
+  }
+}
